@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 
 class HomeDrawer extends StatelessWidget {
-  const HomeDrawer({super.key, required this.onSelectScreen});
+  const HomeDrawer(
+      {super.key,
+      required this.selectedScreenId,
+      required this.onSelectScreen});
 
+  final String selectedScreenId;
   final void Function(String identifier) onSelectScreen;
 
   @override
@@ -42,22 +46,51 @@ class HomeDrawer extends StatelessWidget {
               ],
             ),
           ),
-          ListTile(
-            leading: Icon(
-              Icons.settings,
-              size: 26,
-              color: Theme.of(context).colorScheme.onBackground,
-            ),
-            title: Text(
-              'Filters',
-              style: Theme.of(context).textTheme.titleSmall!.copyWith(
+          Container(
+            margin: const EdgeInsets.only(left: 15.0, right: 15.0, top: 10.0),
+            child: Column(
+              children: [
+                ListTile(
+                  selected: selectedScreenId == 'home',
+                  leading: Icon(
+                    Icons.home,
+                    size: 26,
                     color: Theme.of(context).colorScheme.onBackground,
-                    fontSize: 24,
                   ),
+                  title: Text(
+                    'Home',
+                    style: Theme.of(context).textTheme.titleSmall!.copyWith(
+                          color: Theme.of(context).colorScheme.onBackground,
+                          fontSize: 24,
+                        ),
+                  ),
+                  onTap: () {
+                    onSelectScreen('home');
+                  },
+                ),
+                const SizedBox(
+                  height: 10.0,
+                ),
+                ListTile(
+                  selected: selectedScreenId == 'filters',
+                  leading: Icon(
+                    Icons.filter_list,
+                    size: 26,
+                    color: Theme.of(context).colorScheme.onBackground,
+                  ),
+                  title: Text(
+                    'Filters',
+                    style: Theme.of(context).textTheme.titleSmall!.copyWith(
+                          color: Theme.of(context).colorScheme.onBackground,
+                          fontSize: 24,
+                        ),
+                  ),
+                  onTap: () {
+                    onSelectScreen('filters');
+                  },
+                ),
+              ],
             ),
-            onTap: () {
-              onSelectScreen('filters');
-            },
           ),
         ],
       ),

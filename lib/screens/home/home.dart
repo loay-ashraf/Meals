@@ -20,6 +20,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   int _selectedPageIndex = 0;
+  final String _selectedScreenId = 'home';
   final List<Meal> _favoriteMeals = [];
   Set<Filter> _selectedFilters = {};
 
@@ -99,6 +100,7 @@ class _HomeScreenState extends State<HomeScreen> {
         title: Text(activePageTitle),
       ),
       drawer: HomeDrawer(
+        selectedScreenId: _selectedScreenId,
         onSelectScreen: _setScreen,
       ),
       body: activePage,

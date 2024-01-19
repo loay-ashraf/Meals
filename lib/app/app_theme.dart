@@ -9,10 +9,14 @@ class AppTheme {
     );
 
     return ThemeData(
-      useMaterial3: true,
-      colorScheme: kColorScheme,
-      textTheme: GoogleFonts.latoTextTheme(),
-    );
+        useMaterial3: true,
+        colorScheme: kColorScheme,
+        textTheme: GoogleFonts.latoTextTheme(),
+        listTileTheme: ListTileThemeData(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(25.0),
+            ),
+            selectedTileColor: kColorScheme.background));
   }
 
   static ThemeData dark() {
@@ -22,9 +26,13 @@ class AppTheme {
     );
 
     return ThemeData(
-      useMaterial3: true,
-      colorScheme: kColorScheme,
-      textTheme: GoogleFonts.latoTextTheme(),
-    );
+        useMaterial3: true,
+        colorScheme: kColorScheme,
+        textTheme: GoogleFonts.latoTextTheme(),
+        listTileTheme: ListTileThemeData(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(25.0),
+            ),
+            selectedTileColor: kColorScheme.background));
   }
 }
