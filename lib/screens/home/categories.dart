@@ -1,26 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'package:meals/data/dummy_data.dart';
-import 'package:meals/models/meal.dart';
 import 'package:meals/widgets/category_grid_item.dart';
 import 'package:meals/screens/home/meals.dart';
 import 'package:meals/models/category.dart';
+import 'package:meals/data/dummy_data.dart';
+import 'package:meals/providers/filtered_meals_provider.dart';
 
-class CategoriesScreen extends StatefulWidget {
+class CategoriesScreen extends ConsumerStatefulWidget {
   const CategoriesScreen({
     super.key,
-    required this.availableMeals,
   });
 
-  final List<Meal> availableMeals;
-
   @override
-  State<CategoriesScreen> createState() {
+  ConsumerState<CategoriesScreen> createState() {
     return _CategoriesScreenState();
   }
 }
 
-class _CategoriesScreenState extends State<CategoriesScreen>
+class _CategoriesScreenState extends ConsumerState<CategoriesScreen>
     with SingleTickerProviderStateMixin {
   late AnimationController _animationController;
 
@@ -47,7 +45,8 @@ class _CategoriesScreenState extends State<CategoriesScreen>
   }
 
   void _selectCategory(BuildContext context, Category category) {
-    final filteredMeals = widget.availableMeals
+    final filteredMeals = ref.read(filteredMealsProvider);
+    final categoryMeals = filteredMeals
         .where((meal) => meal.categories.contains(category.id))
         .toList();
 
@@ -55,7 +54,7 @@ class _CategoriesScreenState extends State<CategoriesScreen>
       MaterialPageRoute(
         builder: (ctx) => MealsScreen(
           title: category.title,
-          meals: filteredMeals,
+          meals: categoryMeals,
         ),
       ),
     );

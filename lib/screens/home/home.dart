@@ -8,7 +8,6 @@ import 'package:meals/widgets/home_drawer.dart';
 import 'package:meals/models/meal.dart';
 import 'package:meals/models/filter.dart';
 import 'package:meals/providers/favorite_meals_provider.dart';
-import 'package:meals/providers/filtered_meals_provider.dart';
 
 class HomeScreen extends ConsumerStatefulWidget {
   const HomeScreen({super.key});
@@ -42,11 +41,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final filteredMeals = ref.watch(filteredMealsProvider);
-
-    Widget activePage = CategoriesScreen(
-      availableMeals: filteredMeals,
-    );
+    Widget activePage = const CategoriesScreen();
     var activePageTitle = 'Categories';
 
     if (_selectedPageIndex == 1) {
