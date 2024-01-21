@@ -1,24 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:meals/screens/home/categories.dart';
 import 'package:meals/screens/filters.dart';
-import 'package:meals/screens/home/meals.dart';
+import 'package:meals/screens/home/favorite_meals.dart';
 import 'package:meals/widgets/home_drawer.dart';
-import 'package:meals/models/meal.dart';
 import 'package:meals/models/filter.dart';
-import 'package:meals/providers/favorite_meals_provider.dart';
 
-class HomeScreen extends ConsumerStatefulWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
   @override
-  ConsumerState<HomeScreen> createState() {
+  State<HomeScreen> createState() {
     return _HomeScreenState();
   }
 }
 
-class _HomeScreenState extends ConsumerState<HomeScreen> {
+class _HomeScreenState extends State<HomeScreen> {
   int _selectedPageIndex = 0;
   final String _selectedScreenId = 'home';
 
@@ -45,10 +42,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     var activePageTitle = 'Categories';
 
     if (_selectedPageIndex == 1) {
-      final List<Meal> favoriteMeals = ref.watch(favoriteMealsProvider);
-      activePage = MealsScreen(
-        meals: favoriteMeals,
-      );
+      activePage = const FavoriteMealsScreen();
       activePageTitle = 'Your Favorites';
     }
 
